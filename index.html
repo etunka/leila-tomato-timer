@@ -16,34 +16,30 @@
         <div class="logo">
           <img
             class="logo__image"
-            src="https://i.ibb.co/2sWvXwc/tomato-logo.png"
+            src="src/tomato-logo.png"
             alt="tomato logo"
           />
           <h1 class="logo__text">Leila Tomato Timer</h1>
         </div>
         <div class="buttons">
-          <button id="focus" data-duration="1500">Focus</button>
+          <button id="focus" data-setting="focus">Focus</button>
           <div class="buttons__breaks">
-            <button id="short" data-duration="300">Short break</button>
-            <button id="long" data-duration="900">Long break</button>
+            <button id="short" data-setting="shortBreak">Short break</button>
+            <button id="long" data-setting="longBreak">Long break</button>
           </div>
         </div>
         <div id="done" class="message"></div>
-        <div id="timer" class="timer">
-          <!-- <span id="minutes"></span>
-          <span>:</span>
-          <span id="seconds"></span> -->
-        </div>
+        <div id="timer" class="timer"></div>
 
         <div class="controls">
           <button id="pause">
-            <img src="https://i.ibb.co/2vhDdFr/pause-1.png" alt="" />
+            <img src="src/pause.svg" alt="" />
           </button>
           <button id="play">
-            <img src="https://i.ibb.co/ZHBQy9q/play-1.png" alt="" />
+            <img src="src/play.svg" alt="" />
           </button>
-          <button id="reset">
-            <img src="https://i.ibb.co/tqVfF7k/replay.png" alt="" />
+          <button id="replay">
+            <img src="src/replay.svg" alt="" />
           </button>
         </div>
       </div>
