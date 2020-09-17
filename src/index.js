@@ -16,8 +16,8 @@ const minutes = () => Math.floor(time / 60);
 const seconds = () => time % 60;
 
 
-const tick = new Audio("tick.mp3");
-const bell = new Audio("bell.mp3");
+const tick = new Audio("../tick.mp3");
+const bell = new Audio("../bell.mp3");
 
 
 function createTimer(setting) {
