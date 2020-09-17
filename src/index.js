@@ -1,6 +1,7 @@
 import "./styles.scss";
-import "./tick.mp3"
-import "./bell.mp3"
+const tickFile  =  require("./tick.mp3")
+const bellFile =  require("./bell.mp3")
+
 
 const timerSettings = {
   focus: 1500,
@@ -18,8 +19,8 @@ const minutes = () => Math.floor(time / 60);
 const seconds = () => time % 60;
 
 
-const tick = new Audio("./tick.mp3");
-const bell = new Audio("./bell.mp3");
+const tick = new Audio(tickFile);
+const bell = new Audio(bellFile);
 
 
 function createTimer(setting) {
