@@ -1,0 +1,113 @@
+body {
+  background-color: #fefeff;
+  font-family: 'Revalia', cursive;
+}
+
+.container {
+  max-width: 1400px;
+  padding: 30px;
+}
+
+.logo {
+  text-align: center;
+
+  &__text {
+    font-size: 52px;
+    margin-top: 0;
+    text-align: center;
+  }
+
+  &__image {
+    width: 150px;
+    max-width: 100%;
+  }
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 10px;
+
+  button {
+    background-color: transparent;
+    border: 1px solid #84d4fc;
+    border-radius: 20px;
+    font-size: 18px;
+    font-family: 'Revalia', cursive;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    transition: background-color .2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #84d4fc;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__breaks {
+    button {
+      &:first-child {
+        margin-right: 14px;
+      }
+    }
+  }
+}
+
+.timer {
+  font-size: 85px;
+  font-weight: bold;
+  color: #4a36a7;
+  display: flex;
+  justify-content: center;
+}
+
+.controls {
+  text-align: center;
+  margin-top: 20px;
+
+  button {
+    background-color: transparent;
+    border: none;
+
+    &:focus {
+      border: none;
+    }
+  }
+
+  img {
+    width: 40px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.message {
+  text-align: center;
+  font-size: 30px;
+  line-height: 1.7;
+  color: #84d4fc;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+
+
+
+
+

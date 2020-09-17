@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Revalia&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="logo">
+          <img
+            class="logo__image"
+            src="https://i.ibb.co/2sWvXwc/tomato-logo.png"
+            alt="tomato logo"
+          />
+          <h1 class="logo__text">Leila Tomato Timer</h1>
+        </div>
+        <div class="buttons">
+          <button id="focus" data-duration="1500">Focus</button>
+          <div class="buttons__breaks">
+            <button id="short" data-duration="300">Short break</button>
+            <button id="long" data-duration="900">Long break</button>
+          </div>
+        </div>
+        <div id="done" class="message"></div>
+        <div id="timer" class="timer">
+          <!-- <span id="minutes"></span>
+          <span>:</span>
+          <span id="seconds"></span> -->
+        </div>
+
+        <div class="controls">
+          <button id="pause">
+            <img src="https://i.ibb.co/2vhDdFr/pause-1.png" alt="" />
+          </button>
+          <button id="play">
+            <img src="https://i.ibb.co/ZHBQy9q/play-1.png" alt="" />
+          </button>
+          <button id="reset">
+            <img src="https://i.ibb.co/tqVfF7k/replay.png" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>
