@@ -15,6 +15,9 @@ let activeSetting = "focus";
 
 let timerInterval = undefined;
 
+// default site mode
+let mode = "light";
+
 const minutes = () => Math.floor(time / 60);
 const seconds = () => time % 60;
 
@@ -52,6 +55,20 @@ function replayTimer() {
 function updateButtonStyle(id) {
   document.querySelectorAll(".durations__button").forEach(el => el.classList.remove("active"));
   document.getElementById(id).classList.add("active");
+}
+
+function toggleMode() {
+  if(mode === "light") {
+    mode = "dark";
+    document.body.classList.add("dark");
+    document.getElementById("mode").innerHTML = "Light mode"
+  }
+
+  else if(mode === "dark") {
+    mode = "light";
+    document.body.classList.remove("dark");
+    document.getElementById("mode").innerHTML = "Dark mode"
+  }
 }
 
 function start() {
@@ -100,4 +117,6 @@ document
 document.getElementById("play").addEventListener("click", () => start());
 document.getElementById("pause").addEventListener("click", () => clearInterval(timerInterval));
 document.getElementById("replay").addEventListener("click", () => replayTimer());
+
+document.getElementById("mode").addEventListener("click", () => toggleMode());
 
