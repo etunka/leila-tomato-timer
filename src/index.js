@@ -47,7 +47,11 @@ function updateTimer() {
 function replayTimer() {
   clearInterval(timerInterval);
   createTimer(activeSetting);
-  // start();
+}
+
+function updateButtonStyle(id) {
+  document.querySelectorAll(".durations__button").forEach(el => el.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
 function start() {
@@ -76,13 +80,22 @@ function start() {
 createTimer(activeSetting);
 document
   .getElementById("focus")
-  .addEventListener("click", (e) => createTimer(e.target.dataset.setting));
+  .addEventListener("click", (e) => {
+    createTimer(e.target.dataset.setting);
+    updateButtonStyle("focus");
+  });
 document
   .getElementById("short")
-  .addEventListener("click", (e) => createTimer(e.target.dataset.setting));
+  .addEventListener("click", (e) => {
+    createTimer(e.target.dataset.setting);
+    updateButtonStyle("short");
+  });
 document
   .getElementById("long")
-  .addEventListener("click", (e) => createTimer(e.target.dataset.setting));
+  .addEventListener("click", (e) => {
+    createTimer(e.target.dataset.setting);
+    updateButtonStyle("long");
+  });
 
 document.getElementById("play").addEventListener("click", () => start());
 document.getElementById("pause").addEventListener("click", () => clearInterval(timerInterval));
