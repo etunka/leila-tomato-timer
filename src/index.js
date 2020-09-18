@@ -3,6 +3,9 @@ const tickFile  =  require("./tick.mp3")
 const bellFile =  require("./bell.mp3")
 
 
+// console.log(pauseBtn)
+// document.body.appendChild(pauseBtn)
+
 const timerSettings = {
   focus: 1500,
   shortBreak: 300,

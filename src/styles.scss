@@ -83,6 +83,10 @@ body {
   color: #4a36a7;
   display: flex;
   justify-content: center;
+
+  .dark & {
+    color: #b6abfd;
+  }
 }
 
 .controls {
@@ -97,10 +101,6 @@ body {
     cursor: pointer;
     transition: transform .2s ease-in-out;
 
-    img {
-      max-width: 100%;
-    }
-
     &:focus {
       outline: none;
     }
@@ -114,7 +114,9 @@ body {
     }
 
     .dark & {
-      background-color: #84d4fc;
+      svg {
+        fill: white;
+      }
     }
   }
 }
@@ -154,7 +156,7 @@ body {
 }
 
 .dark {
-  background-color: black;
+  background-color: #222;
   color: white;
 }
 
