@@ -98,6 +98,25 @@ body {
   }
 }
 
+.menu {
+  list-style-type: none;
+  text-align: center;
+  margin-top: 97px;
+  font-size: 36px;
+  line-height: 2.5;
+
+  &__item {
+    span {
+      cursor: pointer;
+      transition: color .2s ease-in-out;
+
+      &:hover {
+        color: #84d4fc;
+      }
+    }
+  }
+}
+
 .message {
   text-align: center;
   font-size: 30px;
@@ -146,6 +165,11 @@ body {
     &__button {
       width: 50px;
     }
+  }
+
+  .menu {
+    margin-top: 50px;
+    font-size: 17px;
   }
 }
 
