@@ -3,9 +3,6 @@ const tickFile  =  require("./tick.mp3")
 const bellFile =  require("./bell.mp3")
 
 
-// console.log(pauseBtn)
-// document.body.appendChild(pauseBtn)
-
 const timerSettings = {
   focus: 1500,
   shortBreak: 300,
@@ -48,6 +45,7 @@ function padDuration(duration) {
 
 function updateTimer() {
   document.getElementById("timer").innerHTML = `${padDuration(minutes())}:${padDuration(seconds())}`;
+  document.getElementById("title").innerHTML = `${padDuration(minutes())}:${padDuration(seconds())}`;
 }
 
 function replayTimer() {
@@ -98,6 +96,8 @@ function start() {
 }
 
 createTimer(activeSetting);
+document.getElementById("title").innerHTML = `Leila Tomato Timer`;
+
 document
   .getElementById("focus")
   .addEventListener("click", (e) => {
