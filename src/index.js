@@ -76,7 +76,7 @@ function start() {
   if(time > 0) {
     tick.play();
 
-    timerInterval = setInterval(()=>startTimer(),1000);
+    timerInterval = setInterval(()=>startTimer(),10);
 
     document.getElementById("done").classList.add("hidden");
 
@@ -88,7 +88,7 @@ function start() {
       if (time === 0) {
         bell.play();
         clearInterval(timerInterval);
-        document.getElementById("done").innerHTML = "Session completed!";
+        document.getElementById("done").innerHTML = activeSetting === "focus" ? `Session completed!` : `End of the break!`;
         document.getElementById("done").classList.remove("hidden");
       }
     }
