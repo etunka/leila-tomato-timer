@@ -285,8 +285,11 @@ body {
   }
 
   .controls {
+    margin-top: 15px;
+
     &__button {
       width: 45px;
+      margin-right: 8px;
     }
   }
 
