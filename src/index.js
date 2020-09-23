@@ -15,8 +15,9 @@ let activeSetting = "focus";
 let timerInterval = undefined;
 
 // default site mode
-let mode = "light";
+let mode = localStorage.getItem("mode") ? localStorage.getItem("mode") : "light";
 
+console.log(localStorage.getItem("mode"));
 const minutes = () => Math.floor(time / 60);
 const seconds = () => time % 60;
 
@@ -58,17 +59,20 @@ function updateButtonStyle(id) {
 }
 
 function toggleMode() {
-  if(mode === "light") {
-    mode = "dark";
-    document.body.classList.add("dark");
-    document.getElementById("mode").innerHTML = "Light mode"
-  }
+  applyMode(mode === "dark" ? "light" : "dark");
+}
 
-  else if(mode === "dark") {
-    mode = "light";
-    document.body.classList.remove("dark");
-    document.getElementById("mode").innerHTML = "Dark mode"
-  }
+function applyMode(colorMode) {
+    mode = colorMode;
+    if(colorMode === "dark") {
+      document.body.classList.add("dark");
+    }
+    else {
+      document.body.classList.remove("dark");
+    }
+
+    document.getElementById("mode").innerHTML = `${colorMode} mode`;
+    localStorage.setItem("mode", colorMode);
 }
 
 function clearLog() {
@@ -100,6 +104,7 @@ function start() {
 }
 
 createTimer(activeSetting);
+applyMode(mode);
 document.getElementById("title").innerHTML = `Leila Tomato Timer`;
 
 document
