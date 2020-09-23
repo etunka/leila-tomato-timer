@@ -2,11 +2,10 @@ import "./styles.scss";
 const tickFile  =  require("./tick.mp3")
 const bellFile =  require("./bell.mp3")
 
-
 const timerSettings = {
   focus: 1500,
   shortBreak: 300,
-  longBreak: 900
+  longBreak: 1200
 }
 
 // remaining time - default 25 minutes
@@ -72,6 +71,11 @@ function toggleMode() {
   }
 }
 
+function clearLog() {
+  const log = document.querySelectorAll(".log__icon");
+  log.forEach(el => el.classList.remove("checked"));
+}
+
 function start() {
   if(time > 0) {
     tick.play();
@@ -120,6 +124,9 @@ document
 document.getElementById("play").addEventListener("click", () => start());
 document.getElementById("pause").addEventListener("click", () => clearInterval(timerInterval));
 document.getElementById("replay").addEventListener("click", () => replayTimer());
-
 document.getElementById("mode").addEventListener("click", () => toggleMode());
+document.querySelectorAll(".log__icon").forEach(el => el.addEventListener("click", (e) => e.target.classList.toggle("checked")));
+document.getElementById("clear").addEventListener("click", () => clearLog());
+
+
 

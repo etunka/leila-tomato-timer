@@ -23,6 +23,7 @@
           />
           <h1 class="logo__text">Leila Tomato Timer</h1>
         </div>
+
         <div class="durations">
           <button class="durations__button" id="focus" data-setting="focus">Focus</button>
           <div class="durations__breaks">
@@ -30,8 +31,9 @@
             <button class="durations__button" id="long" data-setting="longBreak">Long break</button>
           </div>
         </div>
-        <div id="done" class="message"></div>
+
         <div id="timer" class="timer"></div>
+        <div id="done" class="message"></div>
 
         <div class="controls">
           <button id="pause" class="controls__button">
@@ -45,10 +47,52 @@
           </button>
         </div>
 
-        <!-- <ul class="menu">
-          <li class="menu__item"><span id="usage">How to use</span></li>
-          <li class="menu__item"><span id="log">My tomato log</span></li>
-        </ul> -->
+        <div class="log">
+          <h4 class="log__title">My tomato log</h4>
+          <div class="log__wrapper">
+            <div class="log__column">
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+            </div>
+            <div class="log__column">
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+            </div>
+            <div class="log__column">
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+            </div>
+            <div class="log__column">
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+              <img class="log__icon" src="src/tomato-logo.png" alt="tomato logo"/>
+            </div>
+          </div>
+          <div class="log__clear" id="clear">Clear log</div>
+        </div>
+
+        <div class="usage">
+          <h4 class="usage__title">How to use the tomato timer</h4>
+          <div class="usage__content">
+            <p>Tomato timer uses the <a href="https://francescocirillo.com/pages/pomodoro-technique"><span> <strong>Pomodoro Technique,</strong> </span></a> which consists of 6 steps:</p>
+            <ul>
+              <li>1. Choose your task</li>
+              <li>2. Set the timer to <span class="stressed">focus</span></li>
+              <li>3. Work without interruption until the timer rings</li>
+              <li>4. When the timer rings, put a check on your <span class="stressed">tomato log</span></li>
+              <li>5. Take a short break</li>
+              <li>6. When you complete <span class="stressed">4</span> focus sessions, take a long break</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
     <script src="src/index.js"></script>
