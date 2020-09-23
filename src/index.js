@@ -71,7 +71,7 @@ function applyMode(colorMode) {
       document.body.classList.remove("dark");
     }
 
-    document.getElementById("mode").innerHTML = `${colorMode} mode`;
+    document.getElementById("mode").innerHTML = `${colorMode === "dark" ? "light" : "dark"} mode`;
     localStorage.setItem("mode", colorMode);
 }
 
