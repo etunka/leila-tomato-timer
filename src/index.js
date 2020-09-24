@@ -94,7 +94,7 @@ function start() {
   if (time > 0) {
     tick.play();
     Notification.requestPermission();
-    timerInterval = setInterval(()=>startTimer(),1);
+    timerInterval = setInterval(()=>startTimer(),1000);
     document.getElementById("done").classList.add("hidden");
 
     function startTimer() {
