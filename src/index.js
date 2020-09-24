@@ -44,6 +44,7 @@ function padDuration(duration) {
 function updateTimer() {
   document.getElementById("timer").innerHTML = `${padDuration(minutes())}:${padDuration(seconds())}`;
   document.getElementById("title").innerHTML = `${padDuration(minutes())}:${padDuration(seconds())}`;
+  document.getElementById("done").classList.add("hidden");
 }
 
 function replayTimer() {
