@@ -84,7 +84,7 @@ function start() {
   if(time > 0) {
     tick.play();
 
-    timerInterval = setInterval(()=>startTimer(),10);
+    timerInterval = setInterval(()=>startTimer(),1000);
 
     document.getElementById("done").classList.add("hidden");
 
