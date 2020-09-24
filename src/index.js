@@ -17,10 +17,8 @@ let timerInterval = undefined;
 // default site mode
 let mode = localStorage.getItem("mode") ? localStorage.getItem("mode") : "light";
 
-console.log(localStorage.getItem("mode"));
 const minutes = () => Math.floor(time / 60);
 const seconds = () => time % 60;
-
 
 const tick = new Audio(tickFile);
 const bell = new Audio(bellFile);
@@ -64,7 +62,7 @@ function toggleMode() {
 
 function applyMode(colorMode) {
     mode = colorMode;
-    if(colorMode === "dark") {
+    if (colorMode === "dark") {
       document.body.classList.add("dark");
     }
     else {
@@ -80,12 +78,22 @@ function clearLog() {
   log.forEach(el => el.classList.remove("checked"));
 }
 
+function showNotification() {
+  const notification = new Notification("New message from Leila", {
+    body: "Time's up!",
+    icon: "https://leila-tomato-timer.netlify.app/tomato-logo.f4e16dd2.png"
+  })
+
+  notification.onclick = (e) => {
+    window.location.href = "https://leila-tomato-timer.netlify.app/";
+  }
+}
+
 function start() {
-  if(time > 0) {
+  if (time > 0) {
     tick.play();
-
-    timerInterval = setInterval(()=>startTimer(),1000);
-
+    Notification.requestPermission();
+    timerInterval = setInterval(()=>startTimer(),1);
     document.getElementById("done").classList.add("hidden");
 
     function startTimer() {
@@ -98,6 +106,10 @@ function start() {
         clearInterval(timerInterval);
         document.getElementById("done").innerHTML = activeSetting === "focus" ? `Session completed!` : `End of the break!`;
         document.getElementById("done").classList.remove("hidden");
+        // desktop notification
+        if (Notification.permission === "granted") {
+          showNotification();
+        }
       }
     }
   }
@@ -105,8 +117,10 @@ function start() {
 
 createTimer(activeSetting);
 applyMode(mode);
-document.getElementById("title").innerHTML = `Leila Tomato Timer`;
 
+
+// Event handlers
+document.getElementById("title").innerHTML = `Leila Tomato Timer`;
 document
   .getElementById("focus")
   .addEventListener("click", (e) => {
@@ -125,13 +139,17 @@ document
     createTimer(e.target.dataset.setting);
     updateButtonStyle("long");
   });
-
 document.getElementById("play").addEventListener("click", () => start());
 document.getElementById("pause").addEventListener("click", () => clearInterval(timerInterval));
 document.getElementById("replay").addEventListener("click", () => replayTimer());
 document.getElementById("mode").addEventListener("click", () => toggleMode());
 document.querySelectorAll(".log__icon").forEach(el => el.addEventListener("click", (e) => e.target.classList.toggle("checked")));
 document.getElementById("clear").addEventListener("click", () => clearLog());
+
+
+
+
+
 
 
 
