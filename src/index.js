@@ -74,6 +74,27 @@ function applyMode(colorMode) {
     localStorage.setItem("mode", colorMode);
 }
 
+function createLog() {
+  const iconStr = `<img class="log__icon" src="https://leila-tomato-timer.netlify.app/tomato-logo.f4e16dd2.png" alt="tomato logo"/>`
+  // convert string(tomato icon) to DOM
+  const icon = document.createRange().createContextualFragment(iconStr).firstChild;
+
+  const column = document.createElement("div");
+  column.classList.add("log__column");
+
+  // add icon 4 times
+  for(let i = 0; i < 4; i++) {
+    column.appendChild(icon.cloneNode(true));
+  }
+
+  // add column 4 times
+  for(let i = 0; i < 4; i++) {
+    document.getElementById("logWrapper").appendChild(column.cloneNode(true));
+  }
+}
+
+createLog()
+
 function clearLog() {
   const log = document.querySelectorAll(".log__icon");
   log.forEach(el => el.classList.remove("checked"));
