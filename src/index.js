@@ -1,21 +1,11 @@
+import {  createLog, updateLogInterface, saveLogToStorage, fetchLogFromStorage } from './log';
+import { defaultLog, timerSettings } from './constant';
 import "./styles.scss";
+import tomatoLogo from  "./tomato-logo.png";
 const tickFile  =  require("./tick.mp3")
 const bellFile =  require("./bell.mp3")
 
-const timerSettings = {
-  focus: 1500,
-  shortBreak: 300,
-  longBreak: 1200
-}
-
-const defaultLog = [
-  [false,false,false,false],
-  [false,false,false,false],
-  [false,false,false,false],
-  [false,false,false,false]
-];
-
-const savedLogInStorage = fetchLogFromStorage()
+const savedLogInStorage = fetchLogFromStorage();
 
 // remaining time - default 25 minutes
 let time = timerSettings.focus;
@@ -85,71 +75,6 @@ function applyMode(colorMode) {
     localStorage.setItem("mode", colorMode);
 }
 
-function updateLogInterface(log){
-  for(let colIndex = 0; colIndex < log.length; colIndex++) {
-
-    const column = log[colIndex];
-    for(let iconIndex = 0; iconIndex < column.length; iconIndex++) {
-      const icon = document.getElementById(`icon-${colIndex}-${iconIndex}`);
-
-      if(!icon) {
-        continue;
-      }
-
-      if(log[colIndex][iconIndex]) {
-        icon.classList.add("checked");
-      } else {
-        icon.classList.remove("checked");
-      }
-    }
-  }
-}
-
-function saveLogToStorage(log) {
-  localStorage.setItem('savedLog', JSON.stringify(log));
-}
-
-
-function fetchLogFromStorage() {
-  return JSON.parse(localStorage.getItem('savedLog'));
-}
-
-function createLog() {
-  const iconStr = `<img class="log__icon" src="https://leila-tomato-timer.netlify.app/tomato-logo.f4e16dd2.png" alt="tomato logo"/>`
-  const icon = (colIndex,iconIndex) => {
-    // convert string(tomato icon) to DOM
-    const el = document.createRange().createContextualFragment(iconStr).firstChild
-
-    el.id = `icon-${colIndex}-${iconIndex}`;
-
-    el.addEventListener("click", (e) => {
-        savedLog[colIndex][iconIndex] = !savedLog[colIndex][iconIndex];
-
-        updateLogInterface(savedLog);
-        saveLogToStorage(savedLog);
-    })
-
-    return el;
-  }
-
-  const createColumn = () => {
-    const col = document.createElement("div")
-    col.classList.add("log__column");
-    return col;
-  };
-
-  for(let colIndex = 0; colIndex < 4; colIndex++) {
-    const column = createColumn();
-    // add icon 4 times
-    for(let iconIndex = 0; iconIndex < 4; iconIndex++) {
-      column.appendChild(icon(colIndex,iconIndex));
-    }
-    document.getElementById("logWrapper").appendChild(column);
-  }
-
-  updateLogInterface(savedLog);
-}
-
 function clearLog() {
   savedLog = defaultLog;
   updateLogInterface(savedLog);
@@ -159,7 +84,7 @@ function clearLog() {
 function showNotification() {
   const notification = new Notification("New message from Leila", {
     body: "Time's up!",
-    icon: "https://leila-tomato-timer.netlify.app/tomato-logo.f4e16dd2.png"
+    icon: tomatoLogo
   })
 
   notification.onclick = (e) => {
@@ -195,7 +120,7 @@ function start() {
 
 createTimer(activeSetting);
 applyMode(mode);
-createLog();
+createLog(savedLog);
 
 
 // Event handlers
@@ -222,10 +147,6 @@ document.getElementById("play").addEventListener("click", () => start());
 document.getElementById("pause").addEventListener("click", () => clearInterval(timerInterval));
 document.getElementById("replay").addEventListener("click", () => replayTimer());
 document.getElementById("mode").addEventListener("click", () => toggleMode());
-// document.querySelectorAll(".log__icon").forEach(el => el.addEventListener("click", (e) => {
-//   e.target.classList.toggle("checked");
-//   localStorage.setItem("isChecked", localStorage.getItem("isChecked", true) ? false : true);
-// }));
 document.getElementById("clear").addEventListener("click", () => clearLog());
 
 
