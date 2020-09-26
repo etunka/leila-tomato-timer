@@ -8,6 +8,15 @@ const timerSettings = {
   longBreak: 1200
 }
 
+const defaultLog = [
+  [false,false,false,false],
+  [false,false,false,false],
+  [false,false,false,false],
+  [false,false,false,false]
+];
+
+const savedLogInStorage = fetchLogFromStorage()
+
 // remaining time - default 25 minutes
 let time = timerSettings.focus;
 let activeSetting = "focus";
@@ -16,6 +25,8 @@ let timerInterval = undefined;
 
 // default site mode
 let mode = localStorage.getItem("mode") ? localStorage.getItem("mode") : "light";
+
+let savedLog = savedLogInStorage ? savedLogInStorage : defaultLog;
 
 const minutes = () => Math.floor(time / 60);
 const seconds = () => time % 60;
@@ -74,28 +85,75 @@ function applyMode(colorMode) {
     localStorage.setItem("mode", colorMode);
 }
 
-function createLog() {
-  const iconStr = `<img class="log__icon" src="https://leila-tomato-timer.netlify.app/tomato-logo.f4e16dd2.png" alt="tomato logo"/>`
-  // convert string(tomato icon) to DOM
-  const icon = document.createRange().createContextualFragment(iconStr).firstChild;
+function updateLogInterface(log){
+  for(let colIndex = 0; colIndex < log.length; colIndex++) {
 
-  const column = document.createElement("div");
-  column.classList.add("log__column");
+    const column = log[colIndex];
+    for(let iconIndex = 0; iconIndex < column.length; iconIndex++) {
+      const icon = document.getElementById(`icon-${colIndex}-${iconIndex}`);
 
-  // add icon 4 times
-  for(let i = 0; i < 4; i++) {
-    column.appendChild(icon.cloneNode(true));
-  }
+      if(!icon) {
+        continue;
+      }
 
-  // add column 4 times
-  for(let i = 0; i < 4; i++) {
-    document.getElementById("logWrapper").appendChild(column.cloneNode(true));
+      if(log[colIndex][iconIndex]) {
+        icon.classList.add("checked");
+      } else {
+        icon.classList.remove("checked");
+      }
+    }
   }
 }
 
+function saveLogToStorage(log) {
+  localStorage.setItem('savedLog', JSON.stringify(log));
+}
+
+
+function fetchLogFromStorage() {
+  return JSON.parse(localStorage.getItem('savedLog'));
+}
+
+function createLog() {
+  const iconStr = `<img class="log__icon" src="https://leila-tomato-timer.netlify.app/tomato-logo.f4e16dd2.png" alt="tomato logo"/>`
+  const icon = (colIndex,iconIndex) => {
+    // convert string(tomato icon) to DOM
+    const el = document.createRange().createContextualFragment(iconStr).firstChild
+
+    el.id = `icon-${colIndex}-${iconIndex}`;
+
+    el.addEventListener("click", (e) => {
+        savedLog[colIndex][iconIndex] = !savedLog[colIndex][iconIndex];
+
+        updateLogInterface(savedLog);
+        saveLogToStorage(savedLog);
+    })
+
+    return el;
+  }
+
+  const createColumn = () => {
+    const col = document.createElement("div")
+    col.classList.add("log__column");
+    return col;
+  };
+
+  for(let colIndex = 0; colIndex < 4; colIndex++) {
+    const column = createColumn();
+    // add icon 4 times
+    for(let iconIndex = 0; iconIndex < 4; iconIndex++) {
+      column.appendChild(icon(colIndex,iconIndex));
+    }
+    document.getElementById("logWrapper").appendChild(column);
+  }
+
+  updateLogInterface(savedLog);
+}
+
 function clearLog() {
-  const log = document.querySelectorAll(".log__icon");
-  log.forEach(el => el.classList.remove("checked"));
+  savedLog = defaultLog;
+  updateLogInterface(savedLog);
+  saveLogToStorage(savedLog);
 }
 
 function showNotification() {
@@ -164,7 +222,10 @@ document.getElementById("play").addEventListener("click", () => start());
 document.getElementById("pause").addEventListener("click", () => clearInterval(timerInterval));
 document.getElementById("replay").addEventListener("click", () => replayTimer());
 document.getElementById("mode").addEventListener("click", () => toggleMode());
-document.querySelectorAll(".log__icon").forEach(el => el.addEventListener("click", (e) => e.target.classList.toggle("checked")));
+// document.querySelectorAll(".log__icon").forEach(el => el.addEventListener("click", (e) => {
+//   e.target.classList.toggle("checked");
+//   localStorage.setItem("isChecked", localStorage.getItem("isChecked", true) ? false : true);
+// }));
 document.getElementById("clear").addEventListener("click", () => clearLog());
 
 
