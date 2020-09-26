@@ -93,8 +93,6 @@ function createLog() {
   }
 }
 
-createLog()
-
 function clearLog() {
   const log = document.querySelectorAll(".log__icon");
   log.forEach(el => el.classList.remove("checked"));
@@ -139,6 +137,7 @@ function start() {
 
 createTimer(activeSetting);
 applyMode(mode);
+createLog();
 
 
 // Event handlers
