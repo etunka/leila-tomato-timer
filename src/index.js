@@ -1,9 +1,8 @@
 import {  createLog, updateLogInterface, saveLogToStorage, fetchLogFromStorage } from './log';
-import { defaultLog, timerSettings } from './constant';
-import "./styles.scss";
+import { defaultLog, timerSettings, tick, bell } from './constant';
+import { padDuration, calculateMinutes, calculateSeconds, saveToLocalStorage, getFromLocalStorage } from './helper';
 import tomatoLogo from  "./tomato-logo.png";
-const tickFile  =  require("./tick.mp3")
-const bellFile =  require("./bell.mp3")
+import "./styles.scss";
 
 const savedLogInStorage = fetchLogFromStorage();
 
@@ -13,16 +12,13 @@ let activeSetting = "focus";
 
 let timerInterval = undefined;
 
+const minutes = () => calculateMinutes(time);
+const seconds = () => calculateSeconds(time);
+
 // default site mode
-let mode = localStorage.getItem("mode") ? localStorage.getItem("mode") : "light";
+let mode = getFromLocalStorage("mode") ? getFromLocalStorage("mode") : "light";
 
 let savedLog = savedLogInStorage ? savedLogInStorage : defaultLog;
-
-const minutes = () => Math.floor(time / 60);
-const seconds = () => time % 60;
-
-const tick = new Audio(tickFile);
-const bell = new Audio(bellFile);
 
 
 function createTimer(setting) {
@@ -37,13 +33,9 @@ function createTimer(setting) {
   updateTimer();
 }
 
-// add zero pad
-function padDuration(duration) {
-  return duration.toString().padStart(2, "0");
-}
 
 function updateTimer() {
-  document.getElementById("timer").innerHTML = `${padDuration(minutes())}:${padDuration(seconds())}`;
+  document.getElementById("timer").innerHTML = `${padDuration (minutes())}:${padDuration(seconds())}`;
   document.getElementById("title").innerHTML = `${padDuration(minutes())}:${padDuration(seconds())}`;
   document.getElementById("done").classList.add("hidden");
 }
@@ -72,7 +64,7 @@ function applyMode(colorMode) {
     }
 
     document.getElementById("mode").innerHTML = `${colorMode === "dark" ? "light" : "dark"} mode`;
-    localStorage.setItem("mode", colorMode);
+    saveToLocalStorage("mode", colorMode);
 }
 
 function clearLog() {

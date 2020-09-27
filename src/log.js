@@ -1,4 +1,5 @@
 import tomatoLogo from  "./tomato-logo.png";
+import { saveToLocalStorage, getFromLocalStorage } from './helper';
 
 export function updateLogInterface(log){
   for(let colIndex = 0; colIndex < log.length; colIndex++) {
@@ -57,10 +58,10 @@ export function createLog(savedLog) {
 }
 
 export function saveLogToStorage(log) {
-  localStorage.setItem('savedLog', JSON.stringify(log));
+  saveToLocalStorage('savedLog', JSON.stringify(log));
 }
 
 
 export function fetchLogFromStorage() {
-  return JSON.parse(localStorage.getItem('savedLog'));
+  return JSON.parse(getFromLocalStorage('savedLog'));
 }
