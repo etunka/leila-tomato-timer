@@ -1,7 +1,8 @@
 import {  createLog, updateLogInterface, saveLogToStorage, fetchLogFromStorage } from './log';
+import { showNotification } from './notification';
 import { defaultLog, timerSettings, tick, bell } from './constant';
 import { padDuration, calculateMinutes, calculateSeconds, saveToLocalStorage, getFromLocalStorage } from './helper';
-import tomatoLogo from  "./tomato-logo.png";
+
 import "./styles.scss";
 
 const savedLogInStorage = fetchLogFromStorage();
@@ -73,17 +74,6 @@ function clearLog() {
   saveLogToStorage(savedLog);
 }
 
-function showNotification() {
-  const notification = new Notification("New message from Leila", {
-    body: "Time's up!",
-    icon: tomatoLogo
-  })
-
-  notification.onclick = (e) => {
-    window.location.href = "https://leila-tomato-timer.netlify.app/";
-  }
-}
-
 function start() {
   if (time > 0) {
     tick.play();
@@ -109,10 +99,6 @@ function start() {
     }
   }
 }
-
-createTimer(activeSetting);
-applyMode(mode);
-createLog(savedLog);
 
 
 // Event handlers
@@ -142,6 +128,10 @@ document.getElementById("mode").addEventListener("click", () => toggleMode());
 document.getElementById("clear").addEventListener("click", () => clearLog());
 
 
+// Initiate the app
+createTimer(activeSetting);
+applyMode(mode);
+createLog(savedLog);
 
 
 

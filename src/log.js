@@ -1,4 +1,4 @@
-import tomatoLogo from  "./tomato-logo.png";
+import tomatoLogo from  "./images/tomato-logo.png";
 import { saveToLocalStorage, getFromLocalStorage } from './helper';
 
 export function updateLogInterface(log){
