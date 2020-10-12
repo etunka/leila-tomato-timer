@@ -22,6 +22,8 @@ const savedLogInStorage = fetchLogFromStorage();
 let time = timerSettings.focus;
 let activeSetting = "focus";
 
+// define a global interval reference for being able to clear it every time
+// like a chronometer
 let timerInterval = undefined;
 
 const minutes = () => calculateMinutes(time);
